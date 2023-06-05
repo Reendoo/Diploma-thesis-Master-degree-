@@ -1,0 +1,584 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package GUI;
+
+
+import dp.Kontajner;
+import dp.OdpadoveHospodarstvo;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+
+/**
+ *
+ * @author rendo
+ */
+public class JFUpdateKontajner extends javax.swing.JFrame {
+
+    OdpadoveHospodarstvo oh;
+    Kontajner kontajner;
+
+    /**
+     * Creates new form JFUpdateKontajner
+     */
+    public JFUpdateKontajner(/*OdpadoveHospodarstvo oh, int id_kontajneru*/) {
+        /*this.oh = oh;
+        jTextField1.setText("" + id_kontajneru);
+        jTextField1.setEditable(false);*/
+        initComponents();
+        showDate();
+
+    }
+
+    public JFUpdateKontajner(OdpadoveHospodarstvo oh, int id_kontajneru) {
+
+        initComponents();
+        showDate();
+        this.oh = oh;
+        this.kontajner = oh.getKontajner(id_kontajneru);
+
+        jTF_idKontajnera.setText("" + kontajner.getId_kontajnera());
+        jTF_idKontajnera.setEditable(false);
+
+        SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM.YYYY HH:mm:ss");
+        jTF_poslednaAktualizacia.setText(sdfDate.format(kontajner.getDatum_poslednejAktualiziacie()));
+        jTF_poslednaAktualizacia.setEditable(false);
+
+        jTF_posledneVyprazdnenie.setText(sdfDate.format(kontajner.getDatum_poslednehoVyprazdnenia()));
+        jTF_posledneVyprazdnenie.setEditable(false);
+
+        jTF_aktualnyObjem.setText("" + kontajner.getAktualnyObjem());
+        jTF_aktualnyObjem.setEditable(false);
+
+        jTF_maximalnyObjem.setText("" + kontajner.getMaxObjem());
+        jTF_maximalnyObjem.setEditable(false);
+
+        cmb_stojiska.setModel(oh.getStojiska());
+        cmb_stojiska.setSelectedItem(kontajner.getAdresa());
+        cmb_stojiska.setEditable(false);
+        cmb_stojiska.setEnabled(false);
+
+        cmbDruhOdpadu.setModel(oh.getDruhOdpadu("",(DefaultComboBoxModel)cmbDruhOdpadu.getModel()));
+        cmbDruhOdpadu.setSelectedItem(kontajner.getNazovOdpadu());
+        cmbDruhOdpadu.setEditable(false);
+        cmbDruhOdpadu.setEnabled(false);
+
+        for (int i = 0; i <= 10; i++) {
+            cmb_objem.addItem("" + i * 10);
+        }
+
+        cmb_objem.setSelectedItem(kontajner.getAktualnyObjem());
+        cmb_objem.setEditable(false);
+
+        jCB_druhOdpadu.setSelected(false);
+        jCB_zmenMaxObjem.setSelected(false);
+        jCB_stojiska.setSelected(false);
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+    }
+
+    public void setJFUpdate(Kontajner kontajner) {
+        this.kontajner = kontajner;
+
+        jTF_idKontajnera.setText("" + kontajner.getId_kontajnera());
+        jTF_idKontajnera.setEditable(false);
+
+        SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM.YYYY HH:mm:ss");
+        jTF_poslednaAktualizacia.setText(sdfDate.format(kontajner.getDatum_poslednejAktualiziacie()));
+        jTF_poslednaAktualizacia.setEditable(false);
+
+        jTF_posledneVyprazdnenie.setText(sdfDate.format(kontajner.getDatum_poslednehoVyprazdnenia()));
+        jTF_posledneVyprazdnenie.setEditable(false);
+
+        jTF_aktualnyObjem.setText("" + kontajner.getAktualnyObjem());
+        jTF_aktualnyObjem.setEditable(false);
+
+        jTF_maximalnyObjem.setText("" + kontajner.getMaxObjem());
+        jTF_maximalnyObjem.setEditable(false);
+
+        cmb_stojiska.setSelectedItem(kontajner.getAdresa());
+        cmb_stojiska.setEditable(false);
+        cmb_stojiska.setEnabled(false);
+
+        cmbDruhOdpadu.setSelectedItem(kontajner.getNazovOdpadu());
+        cmbDruhOdpadu.setEditable(false);
+        cmbDruhOdpadu.setEnabled(false);
+
+        cmb_objem.setSelectedItem(kontajner.getAktualnyObjem());
+        cmb_objem.setEditable(false);
+        jCB_druhOdpadu.setSelected(false);
+        jCB_zmenMaxObjem.setSelected(false);
+        jCB_stojiska.setSelected(false);
+        this.repaint();
+    }
+
+    public void showDate() {
+        new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                cas();
+            }
+        }
+        ).start();
+    }
+
+    public void cas() {
+        Date date = new Date();
+        SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM.YYYY HH:mm:ss");
+        jLabel4.setText(sdfDate.format(date));
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        datum = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTF_posledneVyprazdnenie = new javax.swing.JTextField();
+        jTF_aktualnyObjem = new javax.swing.JTextField();
+        jCB_stojiska = new javax.swing.JCheckBox();
+        cmb_stojiska = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        cmbDruhOdpadu = new javax.swing.JComboBox<>();
+        jCB_druhOdpadu = new javax.swing.JCheckBox();
+        jTF_idKontajnera = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jTF_poslednaAktualizacia = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jTF_maximalnyObjem = new javax.swing.JTextField();
+        jCB_zmenMaxObjem = new javax.swing.JCheckBox();
+        cmb_objem = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setMaximumSize(new java.awt.Dimension(701, 370));
+        setMinimumSize(new java.awt.Dimension(701, 370));
+        setResizable(false);
+        setSize(new java.awt.Dimension(701, 370));
+
+        jLabel3.setText("stojisko:");
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("datum");
+        jLabel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+
+        jLabel5.setText("aktuálny objem:");
+
+        jTF_posledneVyprazdnenie.setText("1");
+
+        jTF_aktualnyObjem.setText("1");
+        jTF_aktualnyObjem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_aktualnyObjemActionPerformed(evt);
+            }
+        });
+
+        jCB_stojiska.setText("Zmeň stojisko");
+        jCB_stojiska.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCB_stojiskaActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("nový objem:");
+
+        jButton1.setText("ulož");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("druh odpadu");
+
+        jCB_druhOdpadu.setText("Zmeň druh odpadu");
+        jCB_druhOdpadu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCB_druhOdpaduActionPerformed(evt);
+            }
+        });
+
+        jTF_idKontajnera.setText("1");
+
+        jLabel10.setText("posledné vyprázdnenie:");
+
+        jTF_poslednaAktualizacia.setText("1");
+
+        jLabel9.setText("id_kontajnera:");
+
+        jLabel1.setText("posledná aktualizácia:");
+
+        jLabel11.setText("maximalny objem");
+
+        jTF_maximalnyObjem.setText("1");
+
+        jCB_zmenMaxObjem.setText("Zmeň max objem");
+        jCB_zmenMaxObjem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCB_zmenMaxObjemActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout datumLayout = new javax.swing.GroupLayout(datum);
+        datum.setLayout(datumLayout);
+        datumLayout.setHorizontalGroup(
+            datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datumLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(datumLayout.createSequentialGroup()
+                        .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTF_posledneVyprazdnenie, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmb_stojiska, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbDruhOdpadu, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTF_idKontajnera, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTF_poslednaAktualizacia, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(datumLayout.createSequentialGroup()
+                        .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, datumLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTF_aktualnyObjem, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(datumLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmb_objem, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTF_maximalnyObjem, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCB_zmenMaxObjem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCB_druhOdpadu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCB_stojiska, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(datumLayout.createSequentialGroup()
+                .addGap(318, 318, 318)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        datumLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbDruhOdpadu, cmb_objem, cmb_stojiska, jTF_aktualnyObjem, jTF_idKontajnera, jTF_maximalnyObjem, jTF_poslednaAktualizacia, jTF_posledneVyprazdnenie});
+
+        datumLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel10, jLabel11, jLabel3, jLabel5, jLabel6, jLabel7, jLabel9});
+
+        datumLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jCB_druhOdpadu, jCB_stojiska, jCB_zmenMaxObjem});
+
+        datumLayout.setVerticalGroup(
+            datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datumLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTF_idKontajnera, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTF_poslednaAktualizacia, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTF_posledneVyprazdnenie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmb_stojiska, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCB_stojiska))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(datumLayout.createSequentialGroup()
+                        .addComponent(jCB_druhOdpadu)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(datumLayout.createSequentialGroup()
+                        .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbDruhOdpadu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTF_aktualnyObjem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmb_objem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(datumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTF_maximalnyObjem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCB_zmenMaxObjem))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(89, 89, 89))
+        );
+
+        datumLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cmbDruhOdpadu, cmb_objem, cmb_stojiska, jTF_aktualnyObjem, jTF_idKontajnera, jTF_maximalnyObjem, jTF_poslednaAktualizacia, jTF_posledneVyprazdnenie});
+
+        datumLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel10, jLabel11, jLabel3, jLabel5, jLabel6, jLabel7, jLabel9});
+
+        datumLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jCB_druhOdpadu, jCB_stojiska, jCB_zmenMaxObjem});
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Aktualizácia kontajneru");
+        jLabel8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(datum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(datum, javax.swing.GroupLayout.PREFERRED_SIZE, 310, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (cmb_stojiska.getSelectedItem().equals(kontajner.getAdresa())
+                && cmbDruhOdpadu.getSelectedItem().equals(kontajner.getNazovOdpadu())
+                && Integer.parseInt(jTF_maximalnyObjem.getText()) == kontajner.getMaxObjem()) {
+            //meni sa len aktualnyObjem
+            if (kontajner.getAktualnyObjem() > Integer.parseInt("" + cmb_objem.getSelectedItem())) {
+                //zmizovanie aktualnehoObjemu    
+                Object[] ponuka = {"Áno", " Nie"};
+                int moznost = JOptionPane.showOptionDialog(this,
+                        "Naozaj chcete znížiť aktuálny objem kontajneru z "
+                        + kontajner.getAktualnyObjem() + " na "
+                        + "" + cmb_objem.getSelectedItem() + " ?",
+                        "Menenie aktualneho objemu kontajneru",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null, //ikona
+                        ponuka,
+                        ponuka[0]);
+
+                if (moznost == 0) {
+                    kontajner.setAktualnyObjem(Integer.parseInt("" + cmb_objem.getSelectedItem()));
+                    oh.updateKontajner(kontajner, 0);
+                    setJFUpdate(oh.getKontajner(kontajner.getId_kontajnera()));
+                    this.dispose();
+
+                }
+            } else {
+                //zvysovanie objemu  
+                kontajner.setAktualnyObjem(Integer.parseInt("" + cmb_objem.getSelectedItem()));
+                oh.updateKontajner(kontajner, 0);
+                setJFUpdate(oh.getKontajner(kontajner.getId_kontajnera()));
+                this.dispose();
+            }
+
+        } else {
+            //aktualizujem vsetko    
+            kontajner.setAdresa("" + cmb_stojiska.getSelectedItem());
+            kontajner.setNazovOdpadu("" + cmbDruhOdpadu.getSelectedItem());
+            kontajner.setAktualnyObjem(Integer.parseInt("" + cmb_objem.getSelectedItem()));
+            try {
+                kontajner.setMaxObjem(Integer.parseInt("" + jTF_maximalnyObjem.getText()));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Nesprávne zadaný maximálny objem !");
+                return;
+            }
+            oh.updateKontajner(kontajner, 1);
+            setJFUpdate(oh.getKontajner(kontajner.getId_kontajnera()));
+            this.dispose();
+        }        
+        Refresher.r.refreshKontajnery();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCB_stojiskaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_stojiskaActionPerformed
+        if (jCB_stojiska.isSelected()) {
+            Object[] ponuka = {"Áno", " Nie"};
+            int moznost = JOptionPane.showOptionDialog(this,
+                    "Naozaj chcete zmeniť stojisko?",
+                    "Menenie stojiska",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null, //ikona
+                    ponuka,
+                    ponuka[1]);
+            if (moznost == 0) {
+                cmb_stojiska.setEnabled(true);
+                jCB_stojiska.setSelected(true);
+            } else {
+                cmb_stojiska.setSelectedItem(kontajner.getAdresa());
+                cmb_stojiska.setEnabled(false);
+                jCB_stojiska.setSelected(false);
+            }
+        } else {
+            cmb_stojiska.setSelectedItem(kontajner.getAdresa());
+            cmb_stojiska.setEnabled(false);
+            jCB_stojiska.setSelected(false);
+
+        }
+    }//GEN-LAST:event_jCB_stojiskaActionPerformed
+
+    private void jCB_druhOdpaduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_druhOdpaduActionPerformed
+        if (jCB_druhOdpadu.isSelected()) {
+            Object[] ponuka = {"Áno", " Nie"};
+            int moznost = JOptionPane.showOptionDialog(this,
+                    "Naozaj chcete zmeniť druh odpadu?",
+                    "Menenie druhu odpadu",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null, //ikona
+                    ponuka,
+                    ponuka[1]);
+            if (moznost == 0) {
+                cmbDruhOdpadu.setEnabled(true);
+                jCB_druhOdpadu.setSelected(true);
+            } else {
+                cmbDruhOdpadu.setSelectedItem(kontajner.getNazovOdpadu());
+                jCB_druhOdpadu.setSelected(false);
+                cmbDruhOdpadu.setEnabled(false);
+            }
+        } else {
+            cmbDruhOdpadu.setSelectedItem(kontajner.getNazovOdpadu());
+            cmbDruhOdpadu.setEnabled(false);
+            jCB_druhOdpadu.setSelected(false);
+        }
+    }//GEN-LAST:event_jCB_druhOdpaduActionPerformed
+
+    private void jCB_zmenMaxObjemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_zmenMaxObjemActionPerformed
+        if (jCB_zmenMaxObjem.isSelected()) {
+            Object[] ponuka = {"Áno", " Nie"};
+            int moznost = JOptionPane.showOptionDialog(this,
+                    "Naozaj chcete zmeniť maximálny objem?",
+                    "Menenie objemu",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null, //ikona
+                    ponuka,
+                    ponuka[1]);
+            if (moznost == 0) {
+                jTF_maximalnyObjem.setEnabled(true);
+                jTF_maximalnyObjem.setEditable(true);
+                jCB_zmenMaxObjem.setSelected(true);
+            } else {
+                jCB_zmenMaxObjem.setSelected(false);
+                jTF_maximalnyObjem.setText("" + kontajner.getMaxObjem());
+                jTF_maximalnyObjem.setEnabled(false);
+                jTF_maximalnyObjem.setEditable(false);
+            }
+        } else {
+            jCB_zmenMaxObjem.setSelected(false);
+            jTF_maximalnyObjem.setText("" + kontajner.getMaxObjem());
+            jTF_maximalnyObjem.setEnabled(false);
+            jTF_maximalnyObjem.setEditable(false);
+        }
+    }//GEN-LAST:event_jCB_zmenMaxObjemActionPerformed
+
+    private void jTF_aktualnyObjemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_aktualnyObjemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTF_aktualnyObjemActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(JFUpdateKontajner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(JFUpdateKontajner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(JFUpdateKontajner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(JFUpdateKontajner.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new JFUpdateKontajner().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbDruhOdpadu;
+    private javax.swing.JComboBox<String> cmb_objem;
+    private javax.swing.JComboBox<String> cmb_stojiska;
+    private javax.swing.JPanel datum;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCB_druhOdpadu;
+    private javax.swing.JCheckBox jCB_stojiska;
+    private javax.swing.JCheckBox jCB_zmenMaxObjem;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jTF_aktualnyObjem;
+    private javax.swing.JTextField jTF_idKontajnera;
+    private javax.swing.JTextField jTF_maximalnyObjem;
+    private javax.swing.JTextField jTF_poslednaAktualizacia;
+    private javax.swing.JTextField jTF_posledneVyprazdnenie;
+    // End of variables declaration//GEN-END:variables
+}
