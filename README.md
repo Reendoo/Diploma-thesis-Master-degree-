@@ -7,7 +7,7 @@ Cieľom diplomovej práce je vytvoriť geograficky informačný systém pre zber
 
 Key words: GIS, waste management, waste separation, sensors Sensoneo, route vehicle problem(Clark-Wright (CW) sequential algorithm) , travelling salesman problem (Branch and Bound method, Ant colony optimization, Linear mathematical model), Facility location problem (genetic algorithm for capacitated p-median problem)
 
-Kľúčové slová: GIS, odpadové hospodárstvo, separácia odpadu, senzory Sensoneo, plánovanie trás(Clark-Wright (CW) sekvenčný algoritmus), problém obchodného cestujúceho  (Metóda vetiev a hraníc, Optimalizácia kolóniou mravcu, Linearne matematické programovanie), Umiesťnovacia úloha(Genetický algoritmus pre úlohu o kapacitnom p-mediáne)
+Kľúčové slová: GIS, odpadové hospodárstvo, separácia odpadu, senzory Sensoneo, plánovanie trás(Clark-Wright (CW) sekvenčný algoritmus), problém obchodného cestujúceho  (Metóda vetiev a hraníc, Optimalizácia kolóniou mravcov, Lineárne matematické programovanie), Umiesťnovacia úloha(Genetický algoritmus pre úlohu o kapacitnom p-mediáne)
 
 Used tools and technologies:
 
