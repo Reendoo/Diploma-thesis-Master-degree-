@@ -10,6 +10,7 @@ Key words: GIS, waste management, waste separation, sensors Sensoneo, route vehi
 Kľúčové slová: GIS, odpadové hospodárstvo, separácia odpadu, senzory Sensoneo, plánovanie trás(Clark-Wright (CW) sekvenčný algoritmus), problém obchodného cestujúceho  (Metóda vetiev a hraníc, Optimalizácia kolóniou mravcu, Linearne matematické programovanie), Umiesťnovacia úloha(Genetický algoritmus pre úlohu o kapacitnom p-mediáne)
 
 Used tools and technologies:
+
 Použité nástroje a technológie:
 
 - Java, Netbeans IDE, JxMapViewer2, GUROBI Optimization,
